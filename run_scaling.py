@@ -1,5 +1,5 @@
 import numpy as np
-import analyse_scaling as analysis
+import collapseit
 import scipy.optimize as opt
 from jsci.WriteStream import FileWriteStream as JSONWriter
 from jsci.Coding import NumericDecoder
@@ -24,7 +24,7 @@ log_as = logging.getLogger('analyse_scaling')
 log_as.setLevel(logging.DEBUG)
 log_as.addHandler(logging.StreamHandler(sys.stderr))
 
-class EntropyFluctuationsScalingHypothesis(analysis.ScalingHypothesis):
+class EntropyFluctuationsScalingHypothesis(collapseit.ScalingHypothesis):
   """
   Implements the scaling hypothesis
   y = L^-b f( (x - x_c) * L^a)
@@ -42,7 +42,7 @@ class EntropyFluctuationsScalingHypothesis(analysis.ScalingHypothesis):
   def unpack(self, parameters):
     return {'x_c': parameters[0], 'a': parameters[1], 'b': parameters[2]}
 
-class FixableScalingHypothesis(analysis.ScalingHypothesis):
+class FixableScalingHypothesis(collapseit.ScalingHypothesis):
   """
   Implements the scaling hypothesis
   y = L^-b f( (x - x_c) * L^a)
@@ -123,7 +123,7 @@ def cost_adaptor(params):
   with warnings.catch_warnings():
     warnings.filterwarnings('error')
     try:
-      cost = analysis.cost(hypothesis, hypothesis.unpack(params), data)
+      cost = collapseit.cost(hypothesis, hypothesis.unpack(params), data)
     except Warning:
       cost = np.inf
   #log.debug('c: %s, f(c): %s', params, cost)
@@ -195,7 +195,7 @@ with out.wrap_object():
   out.flush()
 
   # Estimate the errors in the scaling analysis
-  errors = analysis.errorAnalysis(hypothesis, c, data, opt_res.fun)
+  errors = collapseit.errorAnalysis(hypothesis, c, data, opt_res.fun)
 
   out.write_pair('errors', errors)
 out.flush()

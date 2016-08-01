@@ -54,13 +54,13 @@ if __name__ == '__main__':
 
     # Plot the collapsed data
     x,y,dy = data_L['data'][:,0], data_L['data'][:,1], data_L['data'][:,2]
-    x,y,dy = scale(c, data_L['L'], (x,y,dy))
+    x,y,dy = hypothesis.scale(c, data_L['L'], (x,y,dy))
     axs[1].set_title('opt')
     axs[1].plot(x, y, label='$L={}$'.format(data_L['L']))
 
     # Plot the collapsed data
     x,y,dy = data_L['data'][:,0], data_L['data'][:,1], data_L['data'][:,2]
-    x,y,dy = scale(c_0, data_L['L'], (x,y,dy))
+    x,y,dy = hypothesis.scale(c_0, data_L['L'], (x,y,dy))
     axs[2].set_title('initial')
     axs[2].plot(x, y, label='$L={}$'.format(data_L['L']))
   plt.show()
