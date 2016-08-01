@@ -15,5 +15,5 @@ To use the packages the 'packages' and 'submodules/packages' subdirectories need
 This is achieved by running the 'export.sh' script with an absolute path.
 
 ```bash
-soure ~/Programming/sdrg/export.sh
+source ~/Programming/collapseit/export.sh
 ```
