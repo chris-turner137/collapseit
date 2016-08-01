@@ -1,0 +1,3 @@
+[submodule "submodules/jsci"]
+	path = submodules/jsci
+	url = https://github.com/chris-turner137/jsci.git

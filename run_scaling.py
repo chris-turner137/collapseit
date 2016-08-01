@@ -9,6 +9,7 @@ import version
 import json
 import time
 import warnings
+import collapseit
 
 t0 = time.time()
 
@@ -137,7 +138,7 @@ with out.wrap_object():
   out.write_pair('git',
   {
     'imps': imps.version.get_version_string(),
-    'collapseit': version.get_version_string()
+    'collapseit': collapseit.get_version_string()
   })
   out.write_pair('method', args.method)
   out.flush()
