@@ -5,6 +5,10 @@ import warnings
 import logging
 from abc import ABCMeta, abstractmethod
 
+# Configure logging for this module
+log = logging.getLogger(__name__)
+log.addHandler(logging.NullHandler())
+
 class ScalingHypothesis(object):
   __metaclass__ = ABCMeta
 
@@ -71,8 +75,7 @@ class DefaultScalingHypothesis(ScalingHypothesis):
         dy = dy * (L ** parameters['b'])
         return (x, y, dy)
       except RuntimeWarning, e:
-        import sys
-        sys.stderr.write("{}\nParameters: {}\n".format(e, parameters))
+        log.error("%s\nParameters: %s\n", e, parameters)
         raise
 
   def pack(self, parameters):

@@ -5,7 +5,6 @@ from jsci.WriteStream import FileWriteStream as JSONWriter
 from jsci.Coding import NumericDecoder
 import sys
 import jsci
-import version
 import json
 import time
 import warnings
@@ -137,7 +136,7 @@ with out.wrap_object():
 
   out.write_pair('git',
   {
-    'imps': imps.version.get_version_string(),
+    'jsci': jsci.get_version_string(),
     'collapseit': collapseit.get_version_string()
   })
   out.write_pair('method', args.method)

@@ -4,6 +4,10 @@ import scipy.optimize as opt
 import warnings
 import logging
 
+# Configure logging for this module
+log = logging.getLogger(__name__)
+log.addHandler(logging.NullHandler())
+
 def master_curve(hypothesis, parameters, data, x_eval):
   """
   Parameters
