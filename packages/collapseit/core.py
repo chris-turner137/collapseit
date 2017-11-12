@@ -3,6 +3,7 @@ import scipy as sp
 import scipy.optimize as opt
 import warnings
 import logging
+from future.utils import iteritems
 
 # Configure logging for this module
 log = logging.getLogger(__name__)
@@ -172,4 +173,4 @@ def errorAnalysis(hypothesis, parameters, data, min_S):
 
     return (key, (abs(left - value), abs(right - value)))
 
-  return dict([helper(key, value) for key, value in parameters.iteritems()])
+  return dict([helper(key, value) for key, value in iteritems(parameters)])

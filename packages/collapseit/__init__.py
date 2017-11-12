@@ -1,5 +1,5 @@
-from core import master_curve, cost, getBrackets, errorAnalysis
-from hypothesis import ScalingHypothesis, DefaultScalingHypothesis
+from collapseit.core import master_curve, cost, getBrackets, errorAnalysis
+from collapseit.hypothesis import ScalingHypothesis, DefaultScalingHypothesis
 
 def _run_here(cmd):
   import subprocess
@@ -20,9 +20,6 @@ def get_version_string():
   return get_git_describe()
 
 if __name__ == '__main__':
-  import time
-  import subprocess
-
-  print 'Hash:      "{}"'.format(get_git_revision_hash())
-  print 'ShortHash: "{}"'.format(get_git_revision_short_hash())
-  print 'Desc:      "{}"'.format(get_git_describe())
+  print('Hash:      "{}"'.format(get_git_revision_hash()))
+  print('ShortHash: "{}"'.format(get_git_revision_short_hash()))
+  print('Desc:      "{}"'.format(get_git_describe()))

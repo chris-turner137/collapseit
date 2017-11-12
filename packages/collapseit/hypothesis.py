@@ -13,15 +13,13 @@ class ScalingHypothesis(object):
   __metaclass__ = ABCMeta
 
   @abstractmethod
-  def scale(self, parameters, L, (x,y,dy)):
+  def scale(self, parameters, L, point):
     """
     Parameters
     ----------
     parameters : Parameters for the scaling hypothesis.
     L          : System size
-    x          : Unscaled independent variable.
-    y          : Unscaled dependent variable.
-    dy         : Statistical error in unscaled dependent variable.
+    point      : Unscaled point (x, y, dy).
 
     Returns
     -------
@@ -66,7 +64,8 @@ class DefaultScalingHypothesis(ScalingHypothesis):
   Implements the scaling hypothesis
   y = L^-b f( (x - x_c) * L^a)
   """
-  def scale(self, parameters, L, (x,y,dy)):
+  def scale(self, parameters, L, point):
+    x, y, dy = point
     with warnings.catch_warnings():
       warnings.filterwarnings('error')
       try:
@@ -74,7 +73,7 @@ class DefaultScalingHypothesis(ScalingHypothesis):
         y = y * (L ** parameters['b'])
         dy = dy * (L ** parameters['b'])
         return (x, y, dy)
-      except RuntimeWarning, e:
+      except RuntimeWarning as e:
         log.error("%s\nParameters: %s\n", e, parameters)
         raise
 

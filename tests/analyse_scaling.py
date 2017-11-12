@@ -19,7 +19,7 @@ if __name__ == '__main__':
 
   # Evaluate the cost function for the data at a point.
   c_0 = {'x_c': 0.59, 'a': 0.75, 'b': 0.11}
-  print cost(hypothesis, c_0, data)
+  print(cost(hypothesis, c_0, data))
 
   # Adaptor between the cost function to the scipy optimisation interface
   def cost_adaptor(params):
@@ -34,14 +34,14 @@ if __name__ == '__main__':
                              minimizer_kwargs={'method': 'Nelder-Mead'},
                              disp=True)
   """
-  print opt_res
+  print(opt_res)
 
   c = c_0
   c = {'x_c': opt_res.x[0], 'a': opt_res.x[1], 'b': opt_res.x[2]}
 
   # Estimate the errors in the scaling analysis
-  print "Error analysis"
-  print errorAnalysis(hypothesis, c, data, opt_res.fun)
+  print("Error analysis")
+  print(errorAnalysis(hypothesis, c, data, opt_res.fun))
 
   import matplotlib as mpl
   mpl.use('TkAgg')  

@@ -28,7 +28,8 @@ class EntropyFluctuationsScalingHypothesis(collapseit.ScalingHypothesis):
   Implements the scaling hypothesis
   y = L^-b f( (x - x_c) * L^a)
   """
-  def scale(self, parameters, L, (x,y,dy)):
+  def scale(self, parameters, L, point):
+    x, y, dy = point
     with warnings.catch_warnings():
       warnings.filterwarnings('once')
       return ((x - parameters['x_c']) * (L ** parameters['a']),
@@ -56,7 +57,8 @@ class FixableScalingHypothesis(collapseit.ScalingHypothesis):
   def get_fixed(self):
     return self._fixed
 
-  def scale(self, parameters, L, (x,y,dy)):
+  def scale(self, parameters, L, point):
+    x, y, dy = point
     parameters = dict(parameters, **self._fixed)
     with warnings.catch_warnings():
       warnings.filterwarnings('once')
@@ -110,7 +112,7 @@ if args.hypothesis == 'default':
 elif args.hypothesis == 'entropy_fluctuations':
   hypothesis = EntropyFluctuationsScalingHypothesis()
 else:
-  raise ValueError, "Unrecognised scaling hypothesis."
+  raise ValueError("Unrecognised scaling hypothesis.")
 
 # Remove fixed keys from the initial
 for key in c_fix.keys():
@@ -170,7 +172,7 @@ with out.wrap_object():
       opt_res = opt.minimize(cost_adaptor, hypothesis.pack(c_0),
                              method='Nelder-Mead')
     else:
-      raise ValueError, 'Unrecognised optimisation method.'
+      raise ValueError('Unrecognised optimisation method.')
 
     if opt_res.message == ['requested number of basinhopping iterations'
                            ' completed successfully']:
